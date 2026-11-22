@@ -78,7 +78,7 @@ window.H24 = {
         "Vertical tabs, split view, volume up to 600%, picture in picture and screenshots.",
         "Focus sessions, routines and Bit Bit, a tiny desk pet. Everything stays in your browser."
       ],
-      site: "",   // add the Flick Flick website link here when it goes live
+      site: "https://harshavarthanep.github.io/flickflick/",   // add the Flick Flick website link here when it goes live
       stores: {
         chrome: "https://chromewebstore.google.com/detail/ccjfgehimibjhjfbncilcfpdpnaibkml",
         edge: "", opera: "", firefox: "", safari: ""
@@ -106,7 +106,7 @@ window.H24 = {
         "Seven themes, Liquid Glass or solid, any accent colour, even your own photo.",
         "Syncs across your computers. No account, no ads, no tracking."
       ],
-      site: "https://harshavarthanep.github.io/Shelf-Shelf/",
+      site: "https://harshavarthanep.github.io/Shelf-Shelf/download",
       web: "https://harshavarthanep.github.io/Shelf-Shelf/",
       stores: {
         chrome: "https://chromewebstore.google.com/detail/bhhnembgfddoomakgmegbhkpklcgelhn",
