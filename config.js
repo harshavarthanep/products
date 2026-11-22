@@ -267,7 +267,7 @@ window.H24 = {
       site: "https://harshavarthanep.github.io/Shelf-Shelf/",
       web: "https://harshavarthanep.github.io/Shelf-Shelf/",
       download: "https://harshavarthanep.github.io/Shelf-Shelf/download",
-      downloadReady: false,     // set to true once Shelf-Shelf/download is live
+      // downloadReady: false,     // set to true once Shelf-Shelf/download is live
       baseViews: 1174, baseDownloads: 0,
       media: {
         video: "media/shelfshelf/demo-30s.mp4",
