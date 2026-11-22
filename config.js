@@ -264,10 +264,10 @@ window.H24 = {
         "Desktop and mobile apps are on the way. Use it on the web today."
       ],
       platforms: ["Web", "Windows", "macOS", "Linux", "Android", "iPhone"],
-      site: "https://harshavarthanep.github.io/Shelf-Shelf/",
+      site: "https://harshavarthanep.github.io/Shelf-Shelf/download",
       web: "https://harshavarthanep.github.io/Shelf-Shelf/",
       download: "https://harshavarthanep.github.io/Shelf-Shelf/download",
-      // downloadReady: false,     // set to true once Shelf-Shelf/download is live
+      downloadReady: true,     // set to true once Shelf-Shelf/download is live
       baseViews: 1174, baseDownloads: 0,
       media: {
         video: "media/shelfshelf/demo-30s.mp4",
