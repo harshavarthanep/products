@@ -29,7 +29,8 @@ window.H24 = {
     enabled: true,
     provider: "https://abacus.jasoncameron.dev",
     namespace: "h24creationz-products",  // keep unique; changing it restarts the real counts
-    baseVisitors: 6847,
+    // baseVisitors: 6847,
+    baseVisitors: 0,
     uniquePerBrowser: true,               // count each browser once as a visitor
     viewSecondsVisible: 1.2               // a product counts as viewed after being on screen this long
   },
@@ -83,7 +84,8 @@ window.H24 = {
         chrome: "https://chromewebstore.google.com/detail/ccjfgehimibjhjfbncilcfpdpnaibkml",
         edge: "", opera: "", firefox: "", safari: ""
       },
-      baseViews: 4213, baseDownloads: 1386,
+      // baseViews: 4213, baseDownloads: 1386,
+      baseViews: 0, baseDownloads: 0, 
       media: {
         video: "media/flickflick/demo-30s.mp4",       // short clip: plays on hover in the card
         fullVideo: "media/flickflick/demo.mp4",       // full demo: plays in the player
@@ -112,7 +114,8 @@ window.H24 = {
         chrome: "https://chromewebstore.google.com/detail/bhhnembgfddoomakgmegbhkpklcgelhn",
         edge: "", opera: "", firefox: "", safari: ""
       },
-      baseViews: 3689, baseDownloads: 1127,
+      // baseViews: 3689, baseDownloads: 1127,
+      baseViews: 0, baseDownloads: 0,
       media: {
         video: "media/shelfshelf/demo-30s.mp4",
         fullVideo: "media/shelfshelf/demo.mp4",
@@ -145,7 +148,8 @@ window.H24 = {
       site: "https://harshavarthanep.github.io/ZenPDF-Pro/download",
       web: "https://harshavarthanep.github.io/ZenPDF-Pro/",
       download: "https://harshavarthanep.github.io/ZenPDF-Pro/download",
-      baseViews: 5126, baseDownloads: 2043,
+      // baseViews: 5126, baseDownloads: 2043,
+      baseViews: 0, baseDownloads: 0, 
       media: {
         video: "https://harshavarthanep.github.io/ZenPDF-Pro/media/ZenPDF-Pro-30s-Horizontal.mp4",
         fullVideo: "https://harshavarthanep.github.io/ZenPDF-Pro/media/ZenPDF-Pro-Demo.mp4",
@@ -176,7 +180,8 @@ window.H24 = {
       site: "https://harshavarthanep.github.io/Nodalis-app/download",
       web: "https://harshavarthanep.github.io/Nodalis-app/",
       download: "https://harshavarthanep.github.io/Nodalis-app/download",
-      baseViews: 2874, baseDownloads: 736,
+      // baseViews: 2874, baseDownloads: 736,
+       baseViews: 0, baseDownloads: 0,
       media: {
         video: "https://harshavarthanep.github.io/Nodalis-app/media/nodalis-demo.mp4",
         poster: "https://harshavarthanep.github.io/Nodalis-app/media/nodalis-demo-poster.jpg",
@@ -206,7 +211,8 @@ window.H24 = {
       site: "https://harshavarthanep.github.io/BeamBeam/",
       web: "https://harshavarthanep.github.io/BeamBeam/",
       download: "https://harshavarthanep.github.io/BeamBeam/download",
-      baseViews: 3317, baseDownloads: 968,
+      // baseViews: 3317, baseDownloads: 968,
+      baseViews: 0, baseDownloads: 0,
       media: {
         video: "https://harshavarthanep.github.io/BeamBeam/media/BeamBeam-30s-Horizontal.mp4",
         fullVideo: "https://harshavarthanep.github.io/BeamBeam/media/BeamBeam-Demo.mp4",
@@ -236,7 +242,8 @@ window.H24 = {
       site: "https://harshavarthanep.github.io/NudgeNudge/",
       web: "https://harshavarthanep.github.io/NudgeNudge/app/",
       download: "https://harshavarthanep.github.io/NudgeNudge/#download",
-      baseViews: 1482, baseDownloads: 309,
+      // baseViews: 1482, baseDownloads: 309,
+      baseViews: 0, baseDownloads: 309, 
       media: {
         video: "https://harshavarthanep.github.io/NudgeNudge/media/nudge-nudge-30s.mp4",
         fullVideo: "https://harshavarthanep.github.io/NudgeNudge/media/nudge-nudge-demo.mp4",
@@ -268,7 +275,8 @@ window.H24 = {
       web: "https://harshavarthanep.github.io/Shelf-Shelf/",
       download: "https://harshavarthanep.github.io/Shelf-Shelf/download",
       downloadReady: true,     // set to true once Shelf-Shelf/download is live
-      baseViews: 1174, baseDownloads: 0,
+      // baseViews: 1174, baseDownloads: 0,
+      baseViews: 0, baseDownloads: 0, 
       media: {
         video: "media/shelfshelf/demo-30s.mp4",
         fullVideo: "media/shelfshelf/demo.mp4",
