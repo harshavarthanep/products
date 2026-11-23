@@ -243,7 +243,7 @@ window.H24 = {
       web: "https://harshavarthanep.github.io/NudgeNudge/app/",
       download: "https://harshavarthanep.github.io/NudgeNudge/#download",
       // baseViews: 1482, baseDownloads: 309,
-      baseViews: 0, baseDownloads: 309, 
+      baseViews: 0, baseDownloads: 0, 
       media: {
         video: "https://harshavarthanep.github.io/NudgeNudge/media/nudge-nudge-30s.mp4",
         fullVideo: "https://harshavarthanep.github.io/NudgeNudge/media/nudge-nudge-demo.mp4",
