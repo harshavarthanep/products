@@ -140,22 +140,47 @@ async function detectBrowser() {
 let BROWSER = 'chrome';
 
 /* ---------------- counters (views + downloads + visitors) ---------------- */
+/* The free counter service allows about 30 requests per 10 seconds per visitor, so requests
+   are sent one at a time with a short gap, and the last good numbers are remembered in the
+   browser. A refresh or a busy moment then shows the last real numbers, never a drop to 0. */
 const Counter = {
-  async call(type, key, keepalive = false) {
-    if (!C.counter.enabled || !C.counter.provider) return null;
+  gap: 380, queue: Promise.resolve(), fresh: 60000,
+  cache(k) { try { return JSON.parse(local.get('h24c_' + k) || 'null'); } catch (e) { return null; } },
+  remember(k, v) { local.set('h24c_' + k, JSON.stringify({ v, t: Date.now() })); },
+  call(type, key, keepalive = false) {
+    if (!C.counter.enabled || !C.counter.provider) return Promise.resolve(null);
+    const run = () => this.send(type, key, keepalive);
+    const p = this.queue.then(run, run);
+    const pause = () => new Promise(r => setTimeout(r, this.gap));
+    this.queue = p.then(pause, pause);
+    return p;
+  },
+  async send(type, key, keepalive) {
     const ctl = 'AbortController' in window ? new AbortController() : null;
-    const t = setTimeout(() => ctl && ctl.abort(), 6000);
+    const t = setTimeout(() => ctl && ctl.abort(), 8000);
     try {
       const url = `${C.counter.provider.replace(/\/$/, '')}/${type}/${encodeURIComponent(C.counter.namespace)}/${encodeURIComponent(key)}`;
       const r = await fetch(url, { signal: ctl && ctl.signal, cache: 'no-store', keepalive });
-      if (r.status === 404) return 0;
-      if (!r.ok) return null;
+      if (r.status === 404) { this.remember(key, 0); return 0; }
+      if (!r.ok) return null;                       // 429 = too many requests: keep the last known number
       const j = await r.json();
-      return typeof j.value === 'number' ? j.value : null;
+      if (typeof j.value !== 'number') return null;
+      this.remember(key, j.value);
+      return j.value;
     } catch (e) { return null; } finally { clearTimeout(t); }
   },
-  hit(k) { return this.call('hit', k, true); },
-  get(k) { return this.call('get', k); }
+  known(k) { const c = this.cache(k); return c ? c.v : null; },
+  async get(k) {
+    const c = this.cache(k);
+    if (c && Date.now() - c.t < this.fresh) return c.v;   // fetched in the last minute: reuse it
+    const v = await this.call('get', k);
+    return v != null ? v : (c ? c.v : null);
+  },
+  async hit(k) {
+    const v = await this.call('hit', k, true);
+    if (v != null) return v;
+    const c = this.cache(k); return c ? c.v + 1 : null;
+  }
 };
 const real = { dl: {}, views: {} };
 const byId = id => all.find(x => x.id === id) || {};
@@ -181,18 +206,24 @@ function countView(id) {
   Counter.hit('views-' + id).then(v => { if (v != null) { real.views[id] = v; paint(id); } });
 }
 async function initCounts() {
-  ready.forEach(p => paint(p.id));
+  // show the last real numbers this browser saw straight away, then refresh them
   ready.forEach(p => {
-    Counter.get('dl-' + p.id).then(v => { if (v != null) { real.dl[p.id] = Math.max(v, real.dl[p.id] || 0); paint(p.id); } });
-    Counter.get('views-' + p.id).then(v => { if (v != null) { real.views[p.id] = Math.max(v, real.views[p.id] || 0); paint(p.id); } });
+    const d = Counter.known('dl-' + p.id), v = Counter.known('views-' + p.id);
+    if (d != null) real.dl[p.id] = d;
+    if (v != null) real.views[p.id] = v;
+    paint(p.id);
   });
   const base = C.counter.baseVisitors || 0, paintV = n => $$('[data-visitors]').forEach(el => animateNum(el, n));
-  paintV(base);
+  const kv = Counter.known('visitors'); paintV(base + (kv || 0));
   const key = 'h24_visitor_v1';
   let v;
   if (!C.counter.uniquePerBrowser || !local.get(key)) { v = await Counter.hit('visitors'); if (v != null) local.set(key, '1'); }
   else v = await Counter.get('visitors');
   if (v != null) paintV(base + v);
+  for (const p of ready) {
+    Counter.get('views-' + p.id).then(n => { if (n != null) { real.views[p.id] = Math.max(n, real.views[p.id] || 0); paint(p.id); } });
+    if (p.downloadReady !== false) Counter.get('dl-' + p.id).then(n => { if (n != null) { real.dl[p.id] = Math.max(n, real.dl[p.id] || 0); paint(p.id); } });
+  }
 }
 function watchViews() {
   if (!('IntersectionObserver' in window)) return;
